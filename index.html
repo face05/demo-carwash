@@ -4,267 +4,567 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <title>RE.MA Carwash</title>
     <style>
-        /* Forza il blocco dello scroll orizzontale */
-        body { overflow-x: hidden; }
+        body { overflow-x: hidden; font-family: 'Inter', sans-serif; }
+        
+        /* Nasconde la scrollbar mantenendo la funzionalità di scorrimento */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        
+        /* Stile custom per le checkbox del form */
+        .checkbox-custom:checked + div {
+            border-color: #ef4444; /* Tailwind red-500 */
+            background-color: #fef2f2; /* Tailwind red-50 */
+        }
     </style>
 </head>
-<body>
+<body class="bg-gray-50 text-gray-800">
 
     <!-- NAVBAR FISSA -->
-    <nav class="fixed top-0 left-0 w-full z-50 bg-white/90 backdrop-blur-md shadow-sm h-20 px-8 flex justify-between items-center transition-all duration-300">        <!-- Logo -->
+    <nav class="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-md shadow-sm h-20 px-6 md:px-12 flex justify-between items-center transition-all duration-300 border-b border-gray-100">
+        <!-- Logo -->
         <a href="#home" class="flex items-center gap-3">
-            <img src="img/logo2.webp" alt="Logo" class="h-[80px] w-auto">
+            <img src="img/logo2.webp" alt="Logo" class="h-[60px] md:h-[80px] w-auto drop-shadow-md">
         </a>
 
         <!-- Menu Desktop -->
-        <div class="hidden md:flex space-x-8 font-medium text-sm uppercase">
-            <a href="#home" class="hover:text-red-600 transition">Home</a>
-            <a href="#servizi" class="hover:text-red-600 transition">Servizi</a>
-            <a href="#prodotti" class="hover:text-red-600 transition">Prodotti</a>
-            <a href="#prenota" class="hover:text-red-600 transition">Prenota</a>
-            <a href="#contatti" class="hover:text-red-600 transition">Contatti</a>
+        <div class="hidden md:flex space-x-8 font-semibold text-sm tracking-wide uppercase text-gray-700">
+            <a href="#home" class="hover:text-red-600 transition-colors duration-300">Home</a>
+            <a href="#servizi" class="hover:text-red-600 transition-colors duration-300">Servizi</a>
+            <a href="#prodotti" class="hover:text-red-600 transition-colors duration-300">Prodotti</a>
+            <a href="#prenota" class="hover:text-red-600 transition-colors duration-300">Prenota</a>
+            <a href="#contatti" class="hover:text-red-600 transition-colors duration-300">Contatti</a>
         </div>
 
         <!-- Bottone Hamburger -->
-        <button id="menu-btn" class="md:hidden text-gray-900 focus:outline-none">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <button id="menu-btn" class="md:hidden text-gray-900 focus:outline-none bg-gray-100 p-2 rounded-lg">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
             </svg>
         </button>
     </nav>
 
     <!-- MENU MOBILE -->
-    <div id="mobile-menu" class="hidden md:hidden fixed top-20 left-0 w-full bg-white z-40 border-b border-gray-100 p-6 flex flex-col items-center space-y-6 font-medium uppercase text-sm shadow-xl">
-        <a href="#home" class="hover:text-red-600 transition">Home</a>
-        <a href="#servizi" class="hover:text-red-600 transition">Servizi</a>
-        <a href="#prodotti" class="hover:text-red-600 transition">Prodotti</a>
-        <a href="#prenota" class="hover:text-red-600 transition">Prenota</a>
-        <a href="#contatti" class="hover:text-red-600 transition">Contatti</a>
+    <div id="mobile-menu" class="hidden md:hidden fixed top-20 left-0 w-full bg-white z-40 border-b border-gray-100 py-6 flex flex-col items-center space-y-6 font-bold uppercase text-sm shadow-2xl transition-all duration-300">
+        <a href="#home" class="w-full text-center py-2 hover:text-red-600 transition">Home</a>
+        <a href="#servizi" class="w-full text-center py-2 hover:text-red-600 transition">Servizi</a>
+        <a href="#prodotti" class="w-full text-center py-2 hover:text-red-600 transition">Prodotti</a>
+        <a href="#prenota" class="w-full text-center py-2 hover:text-red-600 transition">Prenota</a>
+        <a href="#contatti" class="w-full text-center py-2 hover:text-red-600 transition">Contatti</a>
     </div>
 
     <!-- HERO -->
-    <!-- Nota: ho rimosso pt-20 e gestito lo spazio con il margine sul contenuto -->
-    <section id="home" class="relative w-full h-screen flex flex-col justify-center items-center text-center px-4 overflow-hidden">
-        <img src="img/hero.webp" alt="RE.MA Carwash" class="absolute inset-0 w-full h-full object-cover object-center z-0">
-        <div class="absolute inset-0 bg-black/60 z-10"></div>
+    <section id="home" class="relative w-full h-[100svh] flex flex-col justify-center items-center text-center px-4 overflow-hidden mt-0">
+        <img src="img/hero.webp" alt="RE.MA Carwash" class="absolute inset-0 w-full h-full object-cover object-center z-0 scale-105 transform origin-center">
+        <!-- Overlay Gradiente -->
+        <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/80 z-10"></div>
         
-        <div class="relative z-20 text-white w-full max-w-4xl px-2 mt-16">
-            <h1 class="text-4xl md:text-8xl font-bold mb-6 leading-tight">
+        <div class="relative z-20 text-white w-full max-w-5xl px-4 mt-16" data-aos="fade-up">
+            <h1 class="text-5xl md:text-8xl font-extrabold mb-6 leading-tight drop-shadow-2xl">
                 L'Eccellenza <br class="hidden md:block">
                 <span class="text-red-500">in Ogni Lavaggio</span>
             </h1>
-            <p class="text-lg md:text-xl text-gray-200 mb-8 max-w-lg mx-auto">
+            <p class="text-lg md:text-2xl text-gray-200 mb-10 max-w-2xl mx-auto font-light">
                 Dettagli che contano, cura per la tua auto, passione per i risultati.
             </p>
-            <a href="#prenota" class="inline-block bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-full font-bold transition duration-300">
+            <a href="#prenota" class="inline-block bg-red-600 hover:bg-red-700 text-white px-10 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-red-500/50 hover:scale-105 transition-all duration-300">
                 Prenota Ora
             </a>
         </div>
     </section>
 
-     <!-- SERVIZI -->
-<section id="servizi" class="py-20 px-6 max-w-6xl mx-auto">
-    <h2 class="text-4xl font-bold text-center mb-12">I Nostri Servizi Professionali</h2>
-    <div class="grid md:grid-cols-3 gap-8">
+    <!-- SERVIZI -->
+    <section id="servizi" class="py-24 px-6 max-w-7xl mx-auto bg-gray-50">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="text-4xl md:text-5xl font-black text-gray-900 mb-4">I Nostri Servizi Professionali</h2>
+            <div class="w-24 h-1 bg-red-500 mx-auto rounded-full"></div>
+        </div>
         
-        <!-- Pulizia Esterni -->
-    <div class="border rounded-2xl p-6 shadow-lg hover:shadow-xl transition">
-        <img src="img/lavaggio-esterno.webp" alt="Pulizia Esterni" class="mb-4 rounded-lg w-full h-48 object-cover">
-        <h3 class="text-xl font-bold mb-2">Pulizia Esterni</h3>
-        <ul class="text-gray-600 text-sm mb-4 space-y-1 list-disc pl-4">
-            <li>Pre-lavaggio specifico per rimuovere sporco ostinato.</li>
-            <li>Lavaggio a mano con guanto in microfibra.</li>
-            <li>Asciugatura delicata con panni ultra-soft.</li>
-        </ul>
-        <span class="text-red-600 font-bold text-xl">€ 25,00</span>
-    </div>
-
-    <!-- Pulizia Interni -->
-    <div class="border rounded-2xl p-6 shadow-lg hover:shadow-xl transition">
-        <img src="img/lavaggio-interni.webp" alt="Pulizia Interni" class="mb-4 rounded-lg w-full h-48 object-cover">
-        <h3 class="text-xl font-bold mb-2">Pulizia Interni</h3>
-        <ul class="text-gray-600 text-sm mb-4 space-y-1 list-disc pl-4">
-            <li>Aspirazione completa di abitacolo e baule.</li>
-            <li>Pulizia plastiche e cruscotto con prodotti specifici.</li>
-            <li>Pulizia vetri interni per massima visibilità.</li>
-        </ul>
-        <span class="text-red-600 font-bold text-xl">€ 40,00</span>
-    </div>
-
-    <!-- Lavaggio Servito -->
-    <div class="border rounded-2xl p-6 shadow-lg hover:shadow-xl transition">
-        <img src="img/lavaggio-servito.webp" alt="Lavaggio Servito" class="mb-4 rounded-lg w-full h-48 object-cover">
-        <h3 class="text-xl font-bold mb-2">Lavaggio Servito</h3>
-        <ul class="text-gray-600 text-sm mb-4 space-y-1 list-disc pl-4">
-            <li>Lavaggio completo esterno ed interno.</li>
-            <li>Cura del dettaglio e asciugatura manuale.</li>
-            <li>Passaggio finale per finiture impeccabili.</li>
-        </ul>
-        <span class="text-red-600 font-bold text-xl">€ 60,00</span>
-    </div>
-
-    <!-- Sanificazione -->
-    <div class="border rounded-2xl p-6 shadow-lg hover:shadow-xl transition">
-        <img src="img/sanificazione.webp" alt="Sanificazione" class="mb-4 rounded-lg w-full h-48 object-cover">
-        <h3 class="text-xl font-bold mb-2">Sanificazione Ozono</h3>
-        <ul class="text-gray-600 text-sm mb-4 space-y-1 list-disc pl-4">
-            <li>Eliminazione batteri, virus e allergeni.</li>
-            <li>Rimozione definitiva di cattivi odori.</li>
-            <li>Trattamento naturale e sicuro al 100%.</li>
-        </ul>
-        <span class="text-red-600 font-bold text-xl">€ 30,00</span>
-    </div>
-
-    <!-- Decontaminazione Cerchi -->
-    <div class="border rounded-2xl p-6 shadow-lg hover:shadow-xl transition">
-        <img src="img/decontaminazione-cerchi.webp" alt="Decontaminazione Cerchi" class="mb-4 rounded-lg w-full h-48 object-cover">
-        <h3 class="text-xl font-bold mb-2">Decontaminazione Cerchi</h3>
-        <ul class="text-gray-600 text-sm mb-4 space-y-1 list-disc pl-4">
-            <li>Rimozione residui ferrosi e catrame.</li>
-            <li>Pulizia profonda anche nelle zone difficili.</li>
-            <li>Ripristino della brillantezza originale.</li>
-        </ul>
-        <span class="text-red-600 font-bold text-xl">€ 20,00</span>
-    </div>
-
-    <!-- Detailing Interno ed Esterno -->
-    <div class="border rounded-2xl p-6 shadow-lg hover:shadow-xl transition">
-        <img src="img/detailing.webp" alt="Detailing Totale" class="mb-4 rounded-lg w-full h-48 object-cover">
-        <h3 class="text-xl font-bold mb-2">Detailing Totale</h3>
-        <ul class="text-gray-600 text-sm mb-4 space-y-1 list-disc pl-4">
-            <li>Correzione vernice e lucidatura professionale.</li>
-            <li>Lavaggio iniezione/estrazione sedili.</li>
-            <li>Protezione ceramica e cura totale abitacolo.</li>
-        </ul>
-        <span class="text-red-600 font-bold text-xl">€ 250,00</span>
-    </div>
-
-    </div>
-</section>
-
-    <!-- PRODOTTI -->
-    <section id="prodotti" class="py-20 bg-gray-50">
-        <h2 class="text-4xl font-bold text-center mb-12" data-aos="fade-up">Prodotti Professionali Utilizzati</h2>
-        <div class="max-w-5xl mx-auto flex flex-wrap justify-center gap-8">
-            <div class="w-60 bg-white p-6 rounded-2xl shadow-md text-center" data-aos="flip-left">
-                <img src="percorso/cera.jpg" class="mx-auto mb-4 h-32 object-contain" alt="Cera">
-                <h4 class="font-bold">Nano-Ceramic Wax</h4>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Pulizia Esterni -->
+            <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-gray-100 group" data-aos="fade-up" data-aos-delay="0">
+                <div class="overflow-hidden rounded-xl mb-6">
+                    <img src="img/lavaggio-esterno.webp" alt="Pulizia Esterni" class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500">
+                </div>
+                <h3 class="text-2xl font-bold mb-3 text-gray-800">Pulizia Esterni</h3>
+                <ul class="text-gray-600 text-sm mb-6 space-y-2 list-none">
+                    <li class="flex items-center gap-2"><span>✓</span> Pre-lavaggio specifico.</li>
+                    <li class="flex items-center gap-2"><span>✓</span> Lavaggio a mano (microfibra).</li>
+                    <li class="flex items-center gap-2"><span>✓</span> Asciugatura delicata ultra-soft.</li>
+                </ul>
+                <div class="pt-4 border-t border-gray-100">
+                    <span class="text-red-600 font-black text-2xl">€ 25,00</span>
+                </div>
             </div>
-            <div class="w-60 bg-white p-6 rounded-2xl shadow-md text-center" data-aos="flip-left" data-aos-delay="100">
-                <img src="percorso/leather.jpg" class="mx-auto mb-4 h-32 object-contain" alt="Leather">
-                <h4 class="font-bold">Leather Conditioner</h4>
+
+            <!-- Pulizia Interni -->
+            <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-gray-100 group" data-aos="fade-up" data-aos-delay="100">
+                <div class="overflow-hidden rounded-xl mb-6">
+                    <img src="img/lavaggio-interni.webp" alt="Pulizia Interni" class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500">
+                </div>
+                <h3 class="text-2xl font-bold mb-3 text-gray-800">Pulizia Interni</h3>
+                <ul class="text-gray-600 text-sm mb-6 space-y-2 list-none">
+                    <li class="flex items-center gap-2"><span>✓</span> Aspirazione abitacolo e baule.</li>
+                    <li class="flex items-center gap-2"><span>✓</span> Pulizia plastiche e cruscotto.</li>
+                    <li class="flex items-center gap-2"><span>✓</span> Pulizia vetri interni.</li>
+                </ul>
+                <div class="pt-4 border-t border-gray-100">
+                    <span class="text-red-600 font-black text-2xl">€ 40,00</span>
+                </div>
+            </div>
+
+            <!-- Lavaggio Servito -->
+            <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-gray-100 group" data-aos="fade-up" data-aos-delay="200">
+                <div class="overflow-hidden rounded-xl mb-6 relative">
+                    <div class="absolute top-3 right-3 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full z-10">Best Seller</div>
+                    <img src="img/lavaggio-servito.webp" alt="Lavaggio Servito" class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500">
+                </div>
+                <h3 class="text-2xl font-bold mb-3 text-gray-800">Lavaggio Servito</h3>
+                <ul class="text-gray-600 text-sm mb-6 space-y-2 list-none">
+                    <li class="flex items-center gap-2"><span>✓</span> Lavaggio completo est/int.</li>
+                    <li class="flex items-center gap-2"><span>✓</span> Cura del dettaglio.</li>
+                    <li class="flex items-center gap-2"><span>✓</span> Finiture impeccabili.</li>
+                </ul>
+                <div class="pt-4 border-t border-gray-100">
+                    <span class="text-red-600 font-black text-2xl">€ 60,00</span>
+                </div>
+            </div>
+
+            <!-- Sanificazione -->
+            <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-gray-100 group" data-aos="fade-up" data-aos-delay="300">
+                <div class="overflow-hidden rounded-xl mb-6">
+                    <img src="img/sanificazione.webp" alt="Sanificazione" class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500">
+                </div>
+                <h3 class="text-2xl font-bold mb-3 text-gray-800">Sanificazione Ozono</h3>
+                <ul class="text-gray-600 text-sm mb-6 space-y-2 list-none">
+                    <li class="flex items-center gap-2"><span>✓</span> Elimina batteri, virus, allergeni.</li>
+                    <li class="flex items-center gap-2"><span>✓</span> Rimozione cattivi odori.</li>
+                    <li class="flex items-center gap-2"><span>✓</span> Trattamento 100% sicuro.</li>
+                </ul>
+                <div class="pt-4 border-t border-gray-100">
+                    <span class="text-red-600 font-black text-2xl">€ 30,00</span>
+                </div>
+            </div>
+
+            <!-- Decontaminazione Cerchi -->
+            <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-gray-100 group" data-aos="fade-up" data-aos-delay="400">
+                <div class="overflow-hidden rounded-xl mb-6">
+                    <img src="img/decontaminazione-cerchi.webp" alt="Decontaminazione Cerchi" class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500">
+                </div>
+                <h3 class="text-2xl font-bold mb-3 text-gray-800">Decontam. Cerchi</h3>
+                <ul class="text-gray-600 text-sm mb-6 space-y-2 list-none">
+                    <li class="flex items-center gap-2"><span>✓</span> Rimozione residui e catrame.</li>
+                    <li class="flex items-center gap-2"><span>✓</span> Pulizia zone difficili.</li>
+                    <li class="flex items-center gap-2"><span>✓</span> Ripristino brillantezza.</li>
+                </ul>
+                <div class="pt-4 border-t border-gray-100">
+                    <span class="text-red-600 font-black text-2xl">€ 20,00</span>
+                </div>
+            </div>
+
+            <!-- Detailing Totale -->
+            <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-gray-100 group" data-aos="fade-up" data-aos-delay="500">
+                <div class="overflow-hidden rounded-xl mb-6 relative">
+                    <div class="absolute top-3 right-3 bg-gray-900 text-white text-xs font-bold px-3 py-1 rounded-full z-10">Premium</div>
+                    <img src="img/detailing.webp" alt="Detailing Totale" class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500">
+                </div>
+                <h3 class="text-2xl font-bold mb-3 text-gray-800">Detailing Totale</h3>
+                <ul class="text-gray-600 text-sm mb-6 space-y-2 list-none">
+                    <li class="flex items-center gap-2"><span>✓</span> Lucidatura professionale.</li>
+                    <li class="flex items-center gap-2"><span>✓</span> Lavaggio iniezione sedili.</li>
+                    <li class="flex items-center gap-2"><span>✓</span> Protezione ceramica.</li>
+                </ul>
+                <div class="pt-4 border-t border-gray-100">
+                    <span class="text-red-600 font-black text-2xl">€ 250,00</span>
+                </div>
             </div>
         </div>
     </section>
 
- <!-- SEZIONE PRENOTAZIONI OTTIMIZZATA PER MOBILE -->
-<section id="prenota" class="py-10 px-4 md:py-20 md:px-6">
-    <h2 class="text-3xl md:text-4xl font-bold text-center mb-8" data-aos="fade-up">Prenota il Tuo Slot</h2>
-    
-    <!-- Aggiunta classe 'touch-pan-y' per migliorare la fluidità dello scroll su mobile -->
-    <div id="cal-embed-container" 
-     class="max-w-4xl mx-auto w-full h-[650px] overflow-y-auto overflow-x-hidden border rounded-2xl shadow-2xl" 
-     style="-webkit-overflow-scrolling: touch;">
-</div>
-</section>
-
-<!-- Script di Cal.com -->
-<script type="text/javascript">
-  (function (C, A, L) { 
-    let p = function (a, ar) { a.q.push(ar); }; 
-    let d = C.document; 
-    C.Cal = C.Cal || function () { 
-      let cal = C.Cal; 
-      let ar = arguments; 
-      if (!cal.loaded) { 
-        cal.ns = {}; 
-        cal.q = cal.q || []; 
-        d.head.appendChild(d.createElement("script")).src = A; 
-        cal.loaded = true; 
-      } 
-      p(cal, ar); 
-    }; 
-    if (p === C.Cal.p) p(C.Cal, arguments); 
-  })(window, "https://app.cal.com/embed/embed.js", "api");
-
-  // Inizializza con il tuo slug
-  Cal("init", "face-p2zqfx/prenotazione", { origin: "https://cal.com" });
-  
-  Cal("inline", { 
-    elementOrSelector: "#cal-embed-container", 
-    calLink: "face-p2zqfx/prenotazione",
-    config: { 
-      layout: 'month_view',
-      responsive: true
-    }
-  });
-</script>
-
-<!-- CONTATTI -->
-<section id="contatti" class="py-24 bg-gray-900 text-white">
-    <div class="max-w-6xl mx-auto px-6">
+    <!-- PRODOTTI CON SCORRIMENTO ORIZZONTALE -->
+    <section id="prodotti" class="py-24 bg-white relative">
+        <div class="text-center mb-12 px-6" data-aos="fade-up">
+            <h2 class="text-4xl font-black text-gray-900 mb-4">I Nostri Prodotti</h2>
+            <p class="text-gray-500 max-w-2xl mx-auto">Utilizziamo solo prodotti professionali di alta gamma per garantire la massima cura della tua auto.</p>
+        </div>
         
-        <!-- Contenuto principale: Contatti e Mappa (la tua struttura precedente) -->
-        <div class="grid md:grid-cols-2 gap-16 items-center mb-12">
-            <!-- COLONNA SINISTRA: Logo e Contatti -->
-            <div class="space-y-12">
-                <a href="#home" class="flex items-center gap-3">
-                    <img src="img/logo.webp" alt="Logo" class="h-[180px] w-auto">
-                </a>
-                <div data-aos="fade-right">
-                    <h2 class="text-4xl font-bold mb-8">Dove trovarci</h2>
-                    <div class="space-y-4 text-lg">
-                        <p>📍 Via Paragieri 34, Lago (CS)</p>
-                        <p>📞 Tel. +39 351 816 5100</p>
-                        <p>📞 Angelo: +39 348 423 8783</p>
-                        <p>📞 Saverio: +39 340 295 6587</p>
-                        <p>📸 Instagram: <a href="https://www.instagram.com/re.ma_carwash/" target="_blank" class="text-blue-400 hover:underline">@re.ma_carwash</a></p>
-                        <p>✉️ remacarwash@pec.it</p>
+        <div class="relative max-w-7xl mx-auto px-4 md:px-12 group">
+            
+            <!-- Freccia Sinistra (Visibile su Desktop al passaggio del mouse) -->
+            <button id="scrollLeftBtn" class="absolute -left-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 shadow-xl p-4 rounded-full text-red-600 hover:bg-red-50 transition-all opacity-0 group-hover:opacity-100 hidden md:flex items-center justify-center">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+            </button>
+
+            <!-- Contenitore Scorrevole -->
+            <div id="product-slider" class="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar py-8 px-4">
+                
+                <!-- Prodotto 1 -->
+                <div class="min-w-[280px] md:min-w-[320px] bg-gray-50 p-8 rounded-3xl shadow-sm border border-gray-100 text-center snap-center hover:shadow-xl hover:-translate-y-1 transition-all">
+                    <div class="w-32 h-32 mx-auto bg-white rounded-full p-4 shadow-sm mb-6 flex items-center justify-center">
+                        <img src="percorso/cera.jpg" class="h-20 object-contain" alt="Cera">
+                    </div>
+                    <h4 class="font-bold text-xl mb-2 text-gray-800">Nano-Ceramic Wax</h4>
+                    <p class="text-sm text-gray-500">Protezione e lucentezza duratura per la carrozzeria.</p>
+                </div>
+
+                <!-- Prodotto 2 -->
+                <div class="min-w-[280px] md:min-w-[320px] bg-gray-50 p-8 rounded-3xl shadow-sm border border-gray-100 text-center snap-center hover:shadow-xl hover:-translate-y-1 transition-all">
+                    <div class="w-32 h-32 mx-auto bg-white rounded-full p-4 shadow-sm mb-6 flex items-center justify-center">
+                        <img src="percorso/leather.jpg" class="h-20 object-contain" alt="Leather">
+                    </div>
+                    <h4 class="font-bold text-xl mb-2 text-gray-800">Leather Conditioner</h4>
+                    <p class="text-sm text-gray-500">Nutre e protegge gli interni in pelle prevenendo crepe.</p>
+                </div>
+
+                <!-- Prodotto 3 -->
+                <div class="min-w-[280px] md:min-w-[320px] bg-gray-50 p-8 rounded-3xl shadow-sm border border-gray-100 text-center snap-center hover:shadow-xl hover:-translate-y-1 transition-all">
+                    <div class="w-32 h-32 mx-auto bg-white rounded-full p-4 shadow-sm mb-6 flex items-center justify-center">
+                        <img src="percorso/glass.jpg" class="h-20 object-contain" alt="Vetri">
+                    </div>
+                    <h4 class="font-bold text-xl mb-2 text-gray-800">Pro Glass Cleaner</h4>
+                    <p class="text-sm text-gray-500">Pulizia senza aloni per una visibilità perfetta.</p>
+                </div>
+
+                <!-- Prodotto 4 -->
+                <div class="min-w-[280px] md:min-w-[320px] bg-gray-50 p-8 rounded-3xl shadow-sm border border-gray-100 text-center snap-center hover:shadow-xl hover:-translate-y-1 transition-all">
+                    <div class="w-32 h-32 mx-auto bg-white rounded-full p-4 shadow-sm mb-6 flex items-center justify-center">
+                        <img src="percorso/wheel.jpg" class="h-20 object-contain" alt="Cerchi">
+                    </div>
+                    <h4 class="font-bold text-xl mb-2 text-gray-800">Iron Wheel Decon</h4>
+                    <p class="text-sm text-gray-500">Rimuove residui ferrosi e polvere dei freni.</p>
+                </div>
+
+            </div>
+
+            <!-- Freccia Destra -->
+            <button id="scrollRightBtn" class="absolute -right-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 shadow-xl p-4 rounded-full text-red-600 hover:bg-red-50 transition-all opacity-0 group-hover:opacity-100 hidden md:flex items-center justify-center">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </button>
+        </div>
+    </section>
+
+    <!-- SEZIONE PRENOTAZIONI FORM WHATSAPP -->
+    <section id="prenota" class="py-24 px-4 md:px-6 bg-gray-100 relative">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl font-black text-gray-900 mb-4">Prenota Subito</h2>
+                <p class="text-gray-600">Seleziona i servizi e inviaci la tua richiesta direttamente su WhatsApp.</p>
+            </div>
+
+            <form id="whatsappForm" class="bg-white p-8 md:p-12 rounded-3xl shadow-2xl border border-gray-100" data-aos="fade-up" data-aos-delay="100">
+    
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">Nome e Cognome *</label>
+                        <input type="text" id="form-nome" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition bg-gray-50">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">Modello Auto *</label>
+                        <input type="text" id="form-auto" required placeholder="Es. Fiat 500, Audi A3..." class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition bg-gray-50">
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <label class="block text-sm font-bold text-gray-700 mb-4">Seleziona uno o più servizi *</label>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <label class="cursor-pointer relative">
+                            <input type="checkbox" name="servizi" value="Pulizia Esterni" class="checkbox-custom absolute opacity-0 w-0 h-0">
+                            <div class="border-2 border-gray-200 rounded-xl p-4 hover:border-red-300 transition flex items-center justify-between">
+                                <span class="font-semibold text-gray-800">Pulizia Esterni</span>
+                                <span class="text-red-500 font-bold">€ 25</span>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer relative">
+                            <input type="checkbox" name="servizi" value="Pulizia Interni" class="checkbox-custom absolute opacity-0 w-0 h-0">
+                            <div class="border-2 border-gray-200 rounded-xl p-4 hover:border-red-300 transition flex items-center justify-between">
+                                <span class="font-semibold text-gray-800">Pulizia Interni</span>
+                                <span class="text-red-500 font-bold">€ 40</span>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer relative">
+                            <input type="checkbox" name="servizi" value="Lavaggio Servito" class="checkbox-custom absolute opacity-0 w-0 h-0">
+                            <div class="border-2 border-gray-200 rounded-xl p-4 hover:border-red-300 transition flex items-center justify-between">
+                                <span class="font-semibold text-gray-800">Lavaggio Servito</span>
+                                <span class="text-red-500 font-bold">€ 60</span>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer relative">
+                            <input type="checkbox" name="servizi" value="Sanificazione Ozono" class="checkbox-custom absolute opacity-0 w-0 h-0">
+                            <div class="border-2 border-gray-200 rounded-xl p-4 hover:border-red-300 transition flex items-center justify-between">
+                                <span class="font-semibold text-gray-800">Sanificazione Ozono</span>
+                                <span class="text-red-500 font-bold">€ 30</span>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer relative">
+                            <input type="checkbox" name="servizi" value="Decontaminazione Cerchi" class="checkbox-custom absolute opacity-0 w-0 h-0">
+                            <div class="border-2 border-gray-200 rounded-xl p-4 hover:border-red-300 transition flex items-center justify-between">
+                                <span class="font-semibold text-gray-800">Decontam. Cerchi</span>
+                                <span class="text-red-500 font-bold">€ 20</span>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer relative">
+                            <input type="checkbox" name="servizi" value="Detailing Totale" class="checkbox-custom absolute opacity-0 w-0 h-0">
+                            <div class="border-2 border-gray-200 rounded-xl p-4 hover:border-red-300 transition flex items-center justify-between">
+                                <span class="font-semibold text-gray-800">Detailing Totale</span>
+                                <span class="text-red-500 font-bold">€ 250</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Dati Data e Ora -->
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">Data desiderata *</label>
+                        <input type="date" id="form-data" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-red-500 outline-none transition bg-gray-50">
+                        <!-- Messaggio di errore -->
+                        <p id="error-msg" class="text-red-500 text-xs mt-2 font-medium hidden">Siamo chiusi la domenica.</p>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">Orario desiderato *</label>
+                        <select id="form-ora" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-red-500 outline-none transition bg-gray-50">
+                            <option value="">Seleziona un orario...</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <label class="block text-sm font-bold text-gray-700 mb-2">Richieste particolari (opzionale)</label>
+                    <textarea id="form-note" rows="3" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition bg-gray-50 resize-none"></textarea>
+                </div>
+
+                <div class="mb-8 flex items-start gap-3">
+                    <input type="checkbox" id="privacy-check" required class="mt-1 h-5 w-5 rounded border-gray-300 text-red-600 focus:ring-red-500">
+                    <label for="privacy-check" class="text-sm text-gray-600">
+                        Accetto la <a href="privacy.html" class="text-red-600 font-bold hover:underline">Privacy Policy</a> e i <a href="termini.html" class="text-red-600 font-bold hover:underline">Termini e Condizioni</a> *
+                    </label>
+                </div>
+
+                <button type="submit" class="w-full bg-[#25D366] hover:bg-[#20b858] text-white font-bold text-lg py-4 rounded-xl shadow-lg hover:shadow-green-500/30 transition-all duration-300 flex justify-center items-center gap-3">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M20.52 3.48A11.96 11.96 0 0012 0C5.37 0 .04 5.33.04 11.96c0 2.11.55 4.17 1.59 5.98L0 24l6.23-1.63a11.95 11.95 0 005.77 1.47h.01c6.63 0 11.96-5.33 11.96-11.96a11.96 11.96 0 00-3.45-8.4zM12 21.84c-1.83 0-3.56-.49-5.1-1.35l-.36-.21-3.77.99 1.01-3.67-.24-.38a10.02 10.02 0 01-1.53-5.28c0-5.54 4.51-10.04 10.04-10.04s10.04 4.51 10.04 10.04-4.51 10.04-10.04 10.04zM16.48 14.5c-.3-.15-1.78-.88-2.06-.98-.28-.1-.48-.15-.68.15-.2.3-.77.98-.94 1.18-.17.2-.34.22-.64.07-.3-.15-1.27-.47-2.42-1.49-.9-.8-1.5-1.79-1.67-2.09-.17-.3-.02-.46.13-.61.13-.13.3-.34.45-.51.15-.17.2-.29.3-.48.1-.19.05-.36-.02-.51s-.68-1.64-.93-2.24c-.24-.58-.48-.5-.68-.51-.18-.01-.38-.01-.58-.01s-.52.07-.79.35c-.27.28-1.03 1.01-1.03 2.47s1.05 2.87 1.2 3.07c.15.2 2.06 3.15 4.99 4.42 2.93 1.27 2.93.85 3.45.79s1.67-.68 1.91-1.34c.24-.66.24-1.22.17-1.34-.07-.12-.25-.18-.55-.33z"/>
+                    </svg>
+                    Invia Richiesta su WhatsApp
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Contatti -->
+    <section id="contatti" class="py-12 md:py-20 bg-gray-950 text-gray-300">
+        <div class="max-w-7xl mx-auto px-6">
+            
+            <!-- Grid modificato: 2 colonne su mobile (grid-cols-2), 5 su desktop (lg:grid-cols-5) -->
+            <div class="grid grid-cols-2 lg:grid-cols-5 gap-8 md:gap-12 mb-16">
+                
+                <!-- Colonna 1: Logo e Descrizione (span 2 su mobile per centratura) -->
+                <div class="col-span-2 lg:col-span-1 space-y-4">
+                    <img src="img/logo2.webp" alt="RE.MA Carwash" class="h-[60px] md:h-[70px] w-auto">
+                    <p class="text-xs md:text-sm leading-relaxed text-gray-400">
+                        Eccellenza e cura maniacale per la tua auto. Il punto di riferimento per il car detailing a Lago (CS).
+                    </p>
+                </div>
+
+                <!-- Colonna 2: Contatti -->
+                <div>
+                    <h4 class="text-white font-bold text-base mb-4 uppercase tracking-wider">Contatti</h4>
+                    <ul class="space-y-3 text-xs md:text-sm">
+                        <li class="flex gap-3">
+                            <span class="text-red-500">📍</span>
+                            <span>Via Paragieri 34, <br>Lago (CS)</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="text-red-500">📞</span>
+                            <a href="tel:+393518165100" class="hover:text-red-400 transition">+39 351 816 5100</a>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="text-red-500">✉️</span>
+                            <a href="mailto:remacarwash@pec.it" class="hover:text-red-400 transition">remacarwash@pec.it</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Colonna 3: Menu -->
+                <div>
+                    <h4 class="text-white font-bold text-base mb-4 uppercase tracking-wider">Menu</h4>
+                    <ul class="space-y-2 text-xs md:text-sm">
+                        <li><a href="#home" class="hover:text-red-400 transition">Home</a></li>
+                        <li><a href="#servizi" class="hover:text-red-400 transition">Servizi</a></li>
+                        <li><a href="#prodotti" class="hover:text-red-400 transition">Prodotti</a></li>
+                        <li><a href="#prenota" class="hover:text-red-400 transition">Prenota Ora</a></li>
+                    </ul>
+                </div>
+
+                <!-- Colonna 4: Seguici -->
+                <div>
+                    <h4 class="text-white font-bold text-base mb-4 uppercase tracking-wider">Seguici</h4>
+                    <a href="https://www.instagram.com/re.ma_carwash/" target="_blank" 
+                    class="inline-flex items-center gap-3 text-gray-300 hover:text-red-500 transition-colors duration-300">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.173.055 1.847.248 2.277.417.57.222.977.488 1.405.916.428.428.694.835.916 1.405.169.43.362 1.104.417 2.277.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.055 1.173-.248 1.847-.417 2.277-.222.57-.488.977-.916 1.405-.428.428-.835.694-1.405.916-.43.169-1.104.362-2.277.417-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.173-.055-1.847-.248-2.277-.417a3.54 3.54 0 0 1-1.405-.916 3.54 3.54 0 0 1-.916-1.405c-.169-.43-.362-1.104-.417-2.277-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.055-1.173.248-1.847.417-2.277.222-.57.488-.977.916-1.405.428-.428.835-.694 1.405-.916.43-.169 1.104-.362 2.277-.417 1.266-.058 1.646-.07 4.85-.07zm0 1.683c-3.147 0-3.522.013-4.767.07-1.074.05-1.658.232-2.046.383-.514.202-.88.445-1.265.83-.385.385-.628.85-.83 1.265-.151.388-.333.972-.383 2.046-.057 1.245-.07 1.62-.07 4.767s.013 3.522.07 4.767c.05 1.074.232 1.658.383 2.046.202.514.445.88.83 1.265.385.385.85.628 1.265.83.388.151.972.333 2.046.383 1.245.057 1.62.07 4.767.07s3.522-.013 4.767-.07c1.074-.05 1.658-.232 2.046-.383.514-.202.88-.445 1.265-.83.385-.385.628-.85.83-1.265.151-.388.333-.972.383-2.046.057-1.245.07-1.62.07-4.767s-.013-3.522-.07-4.767c-.05-1.074-.232-1.658-.383-2.046-.202-.514-.445-.88-.83-1.265-.385-.385-.85-.628-1.265-.83-.388-.151-.972-.333-2.046-.383-1.245-.057-1.62-.07-4.767-.07zM12 7.027a4.973 4.973 0 1 1 0 9.946 4.973 4.973 0 0 1 0-9.946zm0 1.683a3.29 3.29 0 1 0 0 6.58 3.29 3.29 0 0 0 0-6.58zm5.79-1.925a1.157 1.157 0 1 1-2.314 0 1.157 1.157 0 0 1 2.314 0z"/>
+                        </svg>
+                        <span class="font-medium text-sm">re.ma_carwash</span>
+                    </a>
+                </div>
+
+                <!-- Colonna 5: Dove siamo -->
+                <div class="col-span-2 lg:col-span-1">
+                    <h4 class="text-white font-bold text-base mb-4 uppercase tracking-wider">Dove siamo</h4>
+                    <div class="h-32 w-full bg-gray-800 rounded-xl overflow-hidden border border-gray-700">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3093.5672440140065!2d16.151934176892944!3d39.161823471668896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x133fc01cf9ed2a7d%3A0x85ac7589e8d3897!2sRE.MA%20CARWASH!5e0!3m2!1sit!2sit!4v1781191348999!5m2!1sit!2sit" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     </div>
                 </div>
             </div>
-            
-            <!-- COLONNA DESTRA: Mappa -->
-            <div class="h-96 w-full bg-gray-200 rounded-2xl overflow-hidden shadow-2xl" data-aos="fade-left">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3093.5672440140065!2d16.151934176892944!3d39.161823471668896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x133fc01cf9ed2a7d%3A0x85ac7589e8d3897!2sRE.MA%20CARWASH!5e0!3m2!1sit!2sit!4v1781191348999!5m2!1sit!2sit" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-        </div>
 
-        <!-- SEZIONE LEGALE AGGIORNATA -->
-        <div class="text-center pt-8 border-t border-gray-800">
-            <p class="text-gray-500 text-sm">
-                © 2026 RE.MA CAR WASH S.N.C. P.IVA03965490786 | 
-                <a href="privacy.html" class="hover:text-red-500 transition-colors underline">Privacy Policy</a>
-                <span class="mx-2">|</span>
-                <a href="termini.html" class="hover:text-red-500 transition-colors underline">Termini e Condizioni</a>
-            </p>
-        </div>
-    </div>
-</section>
+            <!-- Blocco crediti legali -->
+            <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-gray-500">
+                <p>© 2026 RE.MA CAR WASH S.N.C. P.IVA 03965490786</p>
+                <div class="flex gap-6">
+                    <a href="privacy.html" class="hover:text-white transition">Privacy Policy</a>
+                    <a href="termini.html" class="hover:text-white transition">Termini e Condizioni</a>
+                </div>
+            </div>
+
+            <!-- Blocco "Created by" -->
+            <div class="mt-8 flex w-full justify-center pt-4 border-t border-gray-800">
+                <a href="https://www.instagram.com/face_site_" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 text-[8px] uppercase tracking-widest text-muted-foreground opacity-60 transition-opacity hover:opacity-100">
+                    <span>Created by</span>
+                    <img src="img/facesite.webp" alt="FaceSite Brand Logo" class="h-[80px] w-auto object-contain" />
+                </a>
+            </div>
+        </div> 
+    </section>
 
     <!-- WHATSAPP POPUP -->
-<a href="https://wa.me/3484238783" target="_blank" 
-   class="fixed bottom-8 right-8 bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition duration-300 z-50 flex items-center justify-center">
-    
-    <!-- Icona SVG di WhatsApp -->
-    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M20.52 3.48A11.96 11.96 0 0012 0C5.37 0 .04 5.33.04 11.96c0 2.11.55 4.17 1.59 5.98L0 24l6.23-1.63a11.95 11.95 0 005.77 1.47h.01c6.63 0 11.96-5.33 11.96-11.96a11.96 11.96 0 00-3.45-8.4zM12 21.84c-1.83 0-3.56-.49-5.1-1.35l-.36-.21-3.77.99 1.01-3.67-.24-.38a10.02 10.02 0 01-1.53-5.28c0-5.54 4.51-10.04 10.04-10.04s10.04 4.51 10.04 10.04-4.51 10.04-10.04 10.04zM16.48 14.5c-.3-.15-1.78-.88-2.06-.98-.28-.1-.48-.15-.68.15-.2.3-.77.98-.94 1.18-.17.2-.34.22-.64.07-.3-.15-1.27-.47-2.42-1.49-.9-.8-1.5-1.79-1.67-2.09-.17-.3-.02-.46.13-.61.13-.13.3-.34.45-.51.15-.17.2-.29.3-.48.1-.19.05-.36-.02-.51s-.68-1.64-.93-2.24c-.24-.58-.48-.5-.68-.51-.18-.01-.38-.01-.58-.01s-.52.07-.79.35c-.27.28-1.03 1.01-1.03 2.47s1.05 2.87 1.2 3.07c.15.2 2.06 3.15 4.99 4.42 2.93 1.27 2.93.85 3.45.79s1.67-.68 1.91-1.34c.24-.66.24-1.22.17-1.34-.07-.12-.25-.18-.55-.33z"/>
-    </svg>
-</a>
+    <a href="https://wa.me/393484238783" target="_blank" rel="noopener noreferrer"
+       class="fixed bottom-6 right-6 bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform duration-300 z-50 flex items-center justify-center">
+        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.52 3.48A11.96 11.96 0 0012 0C5.37 0 .04 5.33.04 11.96c0 2.11.55 4.17 1.59 5.98L0 24l6.23-1.63a11.95 11.95 0 005.77 1.47h.01c6.63 0 11.96-5.33 11.96-11.96a11.96 11.96 0 00-3.45-8.4zM12 21.84c-1.83 0-3.56-.49-5.1-1.35l-.36-.21-3.77.99 1.01-3.67-.24-.38a10.02 10.02 0 01-1.53-5.28c0-5.54 4.51-10.04 10.04-10.04s10.04 4.51 10.04 10.04-4.51 10.04-10.04 10.04zM16.48 14.5c-.3-.15-1.78-.88-2.06-.98-.28-.1-.48-.15-.68.15-.2.3-.77.98-.94 1.18-.17.2-.34.22-.64.07-.3-.15-1.27-.47-2.42-1.49-.9-.8-1.5-1.79-1.67-2.09-.17-.3-.02-.46.13-.61.13-.13.3-.34.45-.51.15-.17.2-.29.3-.48.1-.19.05-.36-.02-.51s-.68-1.64-.93-2.24c-.24-.58-.48-.5-.68-.51-.18-.01-.38-.01-.58-.01s-.52.07-.79.35c-.27.28-1.03 1.01-1.03 2.47s1.05 2.87 1.2 3.07c.15.2 2.06 3.15 4.99 4.42 2.93 1.27 2.93.85 3.45.79s1.67-.68 1.91-1.34c.24-.66.24-1.22.17-1.34-.07-.12-.25-.18-.55-.33z"/>
+        </svg>
+    </a>
 
+    <!-- SCRIPTS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>AOS.init({ duration: 1000, once: true });</script>
+    <script>
+        // Inizializza Animazioni
+        AOS.init({ duration: 800, once: true, offset: 50 });
+
+        // Menu Mobile Toggle
+        const btn = document.getElementById('menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Chiude il menu al click su un link
+        menu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // Scroll Slider Prodotti
+        const slider = document.getElementById('product-slider');
+        const scrollLeft = document.getElementById('scrollLeftBtn');
+        const scrollRight = document.getElementById('scrollRightBtn');
+        
+        if(scrollLeft && scrollRight && slider) {
+            scrollLeft.addEventListener('click', () => {
+                slider.scrollBy({ left: -300, behavior: 'smooth' });
+            });
+            scrollRight.addEventListener('click', () => {
+                slider.scrollBy({ left: 300, behavior: 'smooth' });
+            });
+        }
+
+        // Form verso WhatsApp
+        const waForm = document.getElementById('whatsappForm');
+        waForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nome = document.getElementById('form-nome').value.trim();
+            const auto = document.getElementById('form-auto').value.trim();
+            const data = document.getElementById('form-data').value;
+            const ora = document.getElementById('form-ora').value;
+            const note = document.getElementById('form-note').value.trim();
+            
+            // Recupera servizi selezionati
+            const checkboxes = document.querySelectorAll('input[name="servizi"]:checked');
+            let servizi = [];
+            checkboxes.forEach(cb => servizi.push(cb.value));
+            
+            if(servizi.length === 0) {
+                alert("Per favore, seleziona almeno un servizio per continuare.");
+                return;
+            }
+
+            // Formatta la data in stile italiano (GG/MM/AAAA)
+            const dataItaliana = data.split('-').reverse().join('/');
+
+            // Costruisci il messaggio testuale pulito
+            let messaggio = `*NUOVA RICHIESTA DI PRENOTAZIONE*\n\n`;
+            messaggio += `👤 *Nome:* ${nome}\n`;
+            messaggio += `🚗 *Auto:* ${auto}\n`;
+            messaggio += `📅 *Data:* ${dataItaliana}\n`;
+            messaggio += `🕒 *Orario:* ${ora}\n`;
+            messaggio += `🛠️ *Servizi scelti:* ${servizi.join(', ')}\n`;
+            if(note) {
+                messaggio += `📝 *Note:* ${note}\n`;
+            }
+
+            // Numero WhatsApp di destinazione
+            const waNumber = "393484238783"; 
+            
+            // encodeURIComponent converte in modo sicuro l'intero blocco di testo, inclusi accenti e spazi
+            const url = `https://wa.me/${waNumber}?text=${encodeURIComponent(messaggio)}`;
+            
+            // Apri WhatsApp in una nuova scheda
+            window.open(url, '_blank');
+        });
+    </script>
 
     <script>
-    const btn = document.getElementById('menu-btn');
-    const menu = document.getElementById('mobile-menu');
+        const dateInput = document.getElementById('form-data');
+        const timeSelect = document.getElementById('form-ora');
+        const errorMsg = document.getElementById('error-msg');
 
-    btn.addEventListener('click', () => {
-        menu.classList.toggle('hidden');
-    });
-</script>
+        // Imposta la data minima a oggi (opzionale)
+        dateInput.min = new Date().toISOString().split("T")[0];
 
+        dateInput.addEventListener('change', function() {
+            // Resetta tutto
+            timeSelect.innerHTML = '<option value="">Seleziona un orario...</option>';
+            const day = new Date(this.value).getUTCDay();
+            
+            // 0 = Domenica
+            if (day === 0) {
+                errorMsg.classList.remove('hidden'); // Mostra il messaggio rosso
+                this.value = ''; // Svuota il campo
+            } else {
+                errorMsg.classList.add('hidden'); // Nasconde il messaggio
+                
+                // Logica di popolamento orari (come nel precedente passaggio)
+                const orari = {
+                    standard: ["08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00"],
+                    sabato: ["08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30"]
+                };
+                
+                const orariDisponibili = (day === 6) ? orari.sabato : orari.standard;
+                orariDisponibili.forEach(ora => {
+                    const opt = document.createElement('option');
+                    opt.value = ora;
+                    opt.textContent = ora;
+                    timeSelect.appendChild(opt);
+                });
+            }
+        });
+    </script>
 </body>
 </html>
